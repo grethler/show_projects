@@ -19,3 +19,6 @@ const LIMIT_REPOS = false                  // If the number of display repositor
 const NUM_REPOS = 1                        // Number of repositories to be displayed
 
 ```
+
+# Other
+This script uses [github-readme-stats](https://github.com/anuraghazra/github-readme-stats) from anuraghazra.
