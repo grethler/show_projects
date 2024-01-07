@@ -1,8 +1,9 @@
-var username = "USERNAME";
-var ignoredRepos = ["REPO1", "REPO2"]; 
+const USERNAME = "USERNAME";
+const IGNOREDREPOS = ["REPO1", "REPO2"]; 
+const HTML_ELEMENT = "git_projects" // change for custom class name
 
 // Dont change the following script if you don't know what you are doing 
-var url = `https://api.github.com/users/${username}/repos`;
+var url = `https://api.github.com/users/${USERNAME}/repos`;
 
 function fetchRepos() {
     return fetch(url)
@@ -15,7 +16,7 @@ function fetchRepos() {
                 var date = repo.pushed_at;
                 var fork = repo.fork;
                 // Ignore forked repositories and special repositories like the custom profile one.
-                if (reponame !== username && !ignoredRepos.includes(reponame) && fork != true) {
+                if (reponame !== USERNAME && !IGNOREDREPOS.includes(reponame) && fork != true) {
                     repos[reponame] = [stars, date];
                 }
             });
@@ -45,13 +46,13 @@ function sort_object(obj) {
   }
 
 document.addEventListener("DOMContentLoaded", function () {
-    var headerElement = document.querySelector(".u-layout-row"); // Assuming there's only one element with this class
+    var headerElement = document.querySelector(HTML_ELEMENT); // Assuming there's only one element with this class
     fetchRepos()
         .then(repos => {
             var content = "";
             var sortedRepos = sort_object(repos);
             for (var reponame in sortedRepos) {
-                content += `<a href="https://github.com/${username}/${reponame}" target="_blank"><img src="https://github-readme-stats.vercel.app/api/pin/?username=${username}&repo=${reponame}&theme=dark"/></a>`;
+                content += `<a href="https://github.com/${USERNAME}/${reponame}" target="_blank"><img src="https://github-readme-stats.vercel.app/api/pin/?USERNAME=${USERNAME}&repo=${reponame}&theme=dark"/></a>`;
             }
             headerElement.innerHTML = content;
         })
