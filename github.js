@@ -61,6 +61,7 @@ document.addEventListener("DOMContentLoaded", function () {
                     break;
                 }
                 content += `<a href="https://github.com/${USERNAME}/${reponame}" target="_blank"><img src="https://github-readme-stats.vercel.app/api/pin/?USERNAME=${USERNAME}&repo=${reponame}&theme=dark"/></a>`;
+                num++;
             }
             headerElement.innerHTML = content;
         })
