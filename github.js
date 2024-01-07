@@ -1,6 +1,10 @@
-const USERNAME = "USERNAME";
-const IGNOREDREPOS = ["REPO1", "REPO2"]; 
+const USERNAME = "USERNAME"; // Github username
+const IGNOREDREPOS = ["REPO1", "REPO2"];  // Repositories that shouldn't be displayed
+
 const HTML_ELEMENT = "git_projects" // change for custom class name
+
+const LIMIT_REPOS = false // If the number of display repositories should be limited (if true change next line)
+const NUM_REPOS = 1 // Number of repositories to be displayed
 
 // Dont change the following script if you don't know what you are doing 
 var url = `https://api.github.com/users/${USERNAME}/repos`;
@@ -51,7 +55,11 @@ document.addEventListener("DOMContentLoaded", function () {
         .then(repos => {
             var content = "";
             var sortedRepos = sort_object(repos);
+            let num = 0;
             for (var reponame in sortedRepos) {
+                if (LIMIT_REPOS && num == NUM_REPOS){
+                    break;
+                }
                 content += `<a href="https://github.com/${USERNAME}/${reponame}" target="_blank"><img src="https://github-readme-stats.vercel.app/api/pin/?USERNAME=${USERNAME}&repo=${reponame}&theme=dark"/></a>`;
             }
             headerElement.innerHTML = content;
